@@ -120,6 +120,13 @@ public class RealisticBiomeVanillaPlains extends RealisticBiomeBase {
         birchTrees.setTreeConditionChance(48);
 
         this.addDeco(new DecoHelperThisOrThat(4, DecoHelperThisOrThat.ChanceType.NOT_EQUALS_ZERO, oakTrees, birchTrees));
+        
+        DecoReed decoReed = new DecoReed();
+        decoReed.setCheckRiver(false);
+        decoReed.setMinRiver(0.7f);
+        decoReed.setMaxY(68);
+        decoReed.setLoops(1);
+        this.addDeco(decoReed);
     }
 
     @Override
