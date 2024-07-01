@@ -1,7 +1,5 @@
 package rtg.world.biome.realistic.vanilla;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Biomes;
@@ -34,6 +32,7 @@ public class RealisticBiomeVanillaDeepOcean extends RealisticBiomeBase {
         this.getConfig().ALLOW_SCENIC_LAKES.set(false);
         this.getConfig().addProperty(this.getConfig().ALLOW_SPONGE).set(true);
         this.getConfig().addProperty(this.getConfig().SURFACE_MIX_BLOCK).set("");
+        this.getConfig().addProperty(this.getConfig().BASE_BIOME_HEIGHT).set(40);
     }
 
     @Override
@@ -53,7 +52,7 @@ public class RealisticBiomeVanillaDeepOcean extends RealisticBiomeBase {
         this.addDecoCollection(new DecoCollectionOcean(this.getConfig()));
     }
 
-    public static class TerrainVanillaDeepOcean extends TerrainBase {
+    public class TerrainVanillaDeepOcean extends TerrainBase {
 
         public TerrainVanillaDeepOcean() {
 
@@ -62,7 +61,7 @@ public class RealisticBiomeVanillaDeepOcean extends RealisticBiomeBase {
         @Override
         public float generateNoise(RTGWorld rtgWorld, int x, int y, float border, float river) {
 
-            return terrainOcean(x, y, rtgWorld, river, 40f);
+            return terrainOcean(x, y, rtgWorld, river, getConfig().BASE_BIOME_HEIGHT.get());
         }
     }
 
@@ -86,7 +85,6 @@ public class RealisticBiomeVanillaDeepOcean extends RealisticBiomeBase {
         @Override
         public void paintTerrain(ChunkPrimer primer, int i, int j, int x, int z, int depth, RTGWorld rtgWorld, float[] noise, float river, Biome[] base) {
 
-            Random rand = rtgWorld.rand();
             SimplexNoise simplex = rtgWorld.simplexInstance(0);
 
             for (int k = 255; k > -1; k--) {

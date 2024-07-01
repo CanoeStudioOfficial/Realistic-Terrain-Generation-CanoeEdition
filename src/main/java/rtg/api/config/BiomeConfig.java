@@ -53,6 +53,8 @@ public class BiomeConfig extends Config {
     public final ConfigPropertyFloat FALLEN_LOG_DENSITY_MULTIPLIER;
     public final ConfigPropertyBoolean ALLOW_SPONGE;
 
+    public final ConfigPropertyInteger BASE_BIOME_HEIGHT;
+
     public BiomeConfig(File file) {
         super(file);
 
@@ -271,6 +273,8 @@ public class BiomeConfig extends Config {
         USE_ARCTIC_SURFACE = new ConfigPropertyBoolean("Use Arctic Surface", "Surfaces.Arctic Surface", "", true);
         ALLOW_ICE_TREES = new ConfigPropertyBoolean("Allow Ice Trees", "Decorations.Ice Trees", "", true);
         ALLOW_SPONGE = new ConfigPropertyBoolean("Allow Sponge", "Decorations.Sponge", "", true);
+        BASE_BIOME_HEIGHT = new ConfigPropertyInteger("Base Biome Height", "Terrain.Height", 
+        		"The base number for the biome's terrain generator.  Actual terrain will typically be higher. Default = 40 for deep ocean", 40, 0, 128);
     }
     
     public void loadConfig() {
