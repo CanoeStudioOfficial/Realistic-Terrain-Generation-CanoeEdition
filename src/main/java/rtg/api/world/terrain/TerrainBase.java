@@ -16,7 +16,7 @@ import rtg.api.world.terrain.heighteffect.VariableRuggednessEffect;
 @SuppressWarnings("WeakerAccess")
 public abstract class TerrainBase {
 
-    private static final float minimumOceanFloor = 20.01f; // The lowest Y coord an ocean floor is allowed to be.
+    private static final float minimumOceanFloor = 15.01f; // The lowest Y coord an ocean floor is allowed to be.
     private static final float minimumDuneHeight = 21f; // The strength factor to which the dune height config option is added.
     protected final float minDuneHeight; // The strength factor to which the dune height config option is added.
     protected final float groundNoiseAmplitudeHills;
