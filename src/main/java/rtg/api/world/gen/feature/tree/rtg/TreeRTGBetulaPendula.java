@@ -1,7 +1,7 @@
 package rtg.api.world.gen.feature.tree.rtg;
 
 /**
- * Betula Nigra (River Birch)
+ * Betula Pendula (Silver Birch)
  */
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +40,7 @@ public class TreeRTGBetulaPendula extends TreeRTG {
      * this.addDeco(decoTree);
      */
 
-    private float branchLengthening = 0.15f; // increased length of branches with each block down;
+    private float branchLengthening = 0.20f; // increased length of branches with each block down;
     private float shortestBranch  = 1.6f;
     
     private float lowestInterbranch = .3f;// 2/3s of the shortest interbranch distance (there's an additional random multiplier)
@@ -255,7 +255,7 @@ public class TreeRTGBetulaPendula extends TreeRTG {
 			{
 				double downDirection = branch.initialHorizontal - .15f + rand.nextFloat()*0.3f;
 				float downAscent = -2.4f + rand.nextFloat()*0.8f;
-				float  downLength =  1.4f *(.9f + rand.nextFloat()*0.2f);
+				float  downLength =  1.2f *(.8f + rand.nextFloat()*0.4f);
 				RTGTreeBranch rightBranch = new RTGTreeBranch(downDirection,downAscent,downLength,branch.stage+1,branch.location());
 				makeLeafBranch(rightBranch,world,rand,lightTracker);
 			}
@@ -281,7 +281,7 @@ public class TreeRTGBetulaPendula extends TreeRTG {
 			{
 				double downDirection = branch.initialHorizontal - .15f + rand.nextFloat()*0.3f;
 				float downAscent = -2.4f + rand.nextFloat()*0.8f;
-				float  downLength =  1.4f *(.9f + rand.nextFloat()*0.2f);
+				float  downLength =  1.2f *(.8f + rand.nextFloat()*0.4f);
 				RTGTreeBranch rightBranch = new RTGTreeBranch(downDirection,downAscent,downLength,branch.stage+1,branch.location());
 				makeLeafBranch(rightBranch,world,rand,lightTracker);
 			}

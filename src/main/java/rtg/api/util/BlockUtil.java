@@ -9,7 +9,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import com.google.common.base.Optional;
+
+import com.google.common.reflect.TypeToken;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.BlockDirt;
@@ -250,8 +251,7 @@ public final class BlockUtil {
         if (StringUtils.isEmpty(valueName)) {
             return blockstate;
         }
-        Optional<T> value = propname.parseValue(valueName);
-        return value.isPresent() ? blockstate.withProperty(propname, value.get()) : blockstate;
+        return propname.parseValue(valueName).isPresent() ? blockstate.withProperty(propname, propname.parseValue(valueName).get()) : blockstate;
     }
 
 
