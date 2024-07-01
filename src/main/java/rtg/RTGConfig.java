@@ -32,31 +32,31 @@ import java.util.stream.Collectors;
 
 @SuppressWarnings("WeakerAccess")
 @Mod.EventBusSubscriber(modid = RTG.MOD_ID)
-public final class RTGConfig {
+public class RTGConfig {
     public static final String LANG_ROOT = "rtgconfig.";
-    private static Configuration config;
+    private static Configuration globalConfig;
 
     private RTGConfig() {
     }
 
     public static void init(FMLPreInitializationEvent event) {
-        if (config == null) {
-            config = new Configuration(RTGAPI.getConfigPath().resolve(event.getSuggestedConfigurationFile().getName()).toFile());
+        if (globalConfig == null) {
+            globalConfig = new Configuration(RTGAPI.getConfigPath().resolve(event.getSuggestedConfigurationFile().getName()).toFile());
         }
-        config.load();
+        globalConfig.load();
         Arrays.stream(Setting.values()).forEach(RTGConfig::generateProperty);
         sync();
     }
 
     private static void sync() {
 
-        RTGConfig.config.getCategoryNames().stream()
-                .map(c -> config.getCategory(c))
+        RTGConfig.globalConfig.getCategoryNames().stream()
+                .map(c -> globalConfig.getCategory(c))
                 .forEach(cat -> cat.setLanguageKey(LANG_ROOT + cat.getQualifiedName()));
 
-        if (config.hasChanged()) {
+        if (globalConfig.hasChanged()) {
             Logger.debug("[RTGConfig#sync] Config changed; Saving...");
-            config.save();
+            globalConfig.save();
         }
 
         Arrays.stream(Setting.values()).forEach(setting -> {
@@ -100,44 +100,44 @@ public final class RTGConfig {
         switch (setting.getType()) {
 
             case BOOLEAN:
-                return config.get(setting.getCategory(), setting.name(), (Boolean) setting.getCurVal(), setting.getComment())
+                return globalConfig.get(setting.getCategory(), setting.name(), (Boolean) setting.getCurVal(), setting.getComment())
                         .setLanguageKey(setting.getLangKey())
                         .setRequiresMcRestart(setting.reqRestart());
 
             case STRING:
                 if (setting.isArray()) {
-                    return config.get(setting.getCategory(), setting.name(), (String[]) setting.getCurVal(), setting.getComment())
+                    return globalConfig.get(setting.getCategory(), setting.name(), (String[]) setting.getCurVal(), setting.getComment())
                             .setLanguageKey(setting.getLangKey())
                             .setRequiresMcRestart(setting.reqRestart());
                 } else {
-                    return config.get(setting.getCategory(), setting.name(), (String) setting.getCurVal(), setting.getComment())
+                    return globalConfig.get(setting.getCategory(), setting.name(), (String) setting.getCurVal(), setting.getComment())
                             .setLanguageKey(setting.getLangKey())
                             .setRequiresMcRestart(setting.reqRestart());
                 }
 
             case INTEGER:
-                return config.get(setting.getCategory(), setting.name(), (Integer) setting.getCurVal(), setting.getComment())
+                return globalConfig.get(setting.getCategory(), setting.name(), (Integer) setting.getCurVal(), setting.getComment())
                         .setMinValue((Integer) setting.getMinVal())
                         .setMaxValue((Integer) setting.getMaxVal())
                         .setLanguageKey(setting.getLangKey())
                         .setRequiresMcRestart(setting.reqRestart());
 
             case DOUBLE:
-                return config.get(setting.getCategory(), setting.name(), (Double) setting.getCurVal(), setting.getComment())
+                return globalConfig.get(setting.getCategory(), setting.name(), (Double) setting.getCurVal(), setting.getComment())
                         .setMinValue((Double) setting.getMinVal())
                         .setMaxValue((Double) setting.getMaxVal())
                         .setLanguageKey(setting.getLangKey())
                         .setRequiresMcRestart(setting.reqRestart());
         }
-        return config.get(setting.getCategory(), setting.name(), setting.getDefVal().toString(), setting.getComment())
+        return globalConfig.get(setting.getCategory(), setting.name(), setting.getDefVal().toString(), setting.getComment())
                 .setLanguageKey(setting.getLangKey())
                 .setRequiresMcRestart(setting.reqRestart());
     }
 
     private static Property getProperty(Setting setting) {
         Property ret = null;
-        if (config.hasCategory(setting.getCategory())) {
-            ret = config.getCategory(setting.getCategory()).get(setting.name());
+        if (globalConfig.hasCategory(setting.getCategory())) {
+            ret = globalConfig.getCategory(setting.getCategory()).get(setting.name());
         }
         return ret != null ? ret : generateProperty(setting);
     }
@@ -442,9 +442,9 @@ public final class RTGConfig {
         }
 
         private static List<IConfigElement> getElements() {
-            return RTGConfig.config.getCategoryNames().stream()
-                    .filter(cat -> !RTGConfig.config.getCategory(cat).isChild())
-                    .map(cat -> new ConfigElement(RTGConfig.config.getCategory(cat)))
+            return RTGConfig.globalConfig.getCategoryNames().stream()
+                    .filter(cat -> !RTGConfig.globalConfig.getCategory(cat).isChild())
+                    .map(cat -> new ConfigElement(RTGConfig.globalConfig.getCategory(cat)))
                     .collect(Collectors.toList());
         }
     }
