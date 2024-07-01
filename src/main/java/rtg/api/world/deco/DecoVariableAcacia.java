@@ -27,6 +27,8 @@ import rtg.api.world.gen.feature.tree.rtg.TreeRTGAcaciaBucheri;
 import rtg.api.world.gen.feature.tree.rtg.TreeRTGQuercusFalcata;
 import rtg.api.world.gen.feature.tree.rtg.TreeRTGQuercusNigra;
 import rtg.api.world.gen.feature.tree.rtg.TreeRTGQuercusRobur;
+import rtg.api.world.gen.feature.tree.rtg.TreeRTGVachelliaTortilis;
+import rtg.api.world.gen.feature.tree.rtg.TreeRTGVachelliaTortilisMega;
 
 /**
  * Variable Trees
@@ -37,9 +39,9 @@ import rtg.api.world.gen.feature.tree.rtg.TreeRTGQuercusRobur;
 public class DecoVariableAcacia extends DecoVariableTree {
 	
 	public DecoVariableAcacia() {
-		 tallTree = new TreeRTGAcaciaAbyssinicaMega();
-	     mediumTree = new TreeRTGAcaciaAbyssinica();
-	     smallTree = new TreeRTGAcaciaBucheri();
+		 tallTree = new TreeRTGVachelliaTortilisMega();
+	     mediumTree = new TreeRTGVachelliaTortilisMega();
+	     smallTree = new TreeRTGVachelliaTortilis();
 	     this.materials = this.materialsPicker.acacia;
 	     this.averageHeightSqrt += 0f;
 	 	 mediumTreeMinimumHeight = 11; // shortest allowed tall tree

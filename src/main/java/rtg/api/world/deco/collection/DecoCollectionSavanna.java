@@ -38,23 +38,6 @@ public class DecoCollectionSavanna extends DecoCollectionBase {
         decoFallenTree.setMaxSize(6);
         this.addDeco(decoFallenTree, config.ALLOW_LOGS.get());
 
-        TreeRTG bucheriTree = new TreeRTGAcaciaBucheri();
-        bucheriTree.setLogBlock(Blocks.LOG2.getDefaultState());
-        bucheriTree.setLeavesBlock(Blocks.LEAVES2.getDefaultState());
-        bucheriTree.setMinTrunkSize(4);
-        bucheriTree.setMaxTrunkSize(9);
-        //this.addTree(bucheriTree);
-
-        DecoTree bucheriTrees = new DecoTree(bucheriTree);
-        bucheriTrees.setLoops(1);
-        bucheriTrees.setTreeType(TreeType.RTG_TREE);
-        bucheriTrees.getDistribution().setNoiseDivisor(80f);
-        bucheriTrees.getDistribution().setNoiseFactor(60f);
-        bucheriTrees.getDistribution().setNoiseAddend(-15f);
-        bucheriTrees.setTreeCondition(TreeCondition.NOISE_GREATER_AND_RANDOM_CHANCE);
-        bucheriTrees.setTreeConditionNoise(-0.4f);
-        bucheriTrees.setTreeConditionChance(28);
-        //this.addDeco(bucheriTrees);
         this.addDeco(new DecoVariableAcacia());
 
         DecoBoulder decoBoulder = new DecoBoulder();

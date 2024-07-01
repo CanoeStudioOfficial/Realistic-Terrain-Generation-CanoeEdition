@@ -1,5 +1,6 @@
 package rtg.api.world.gen.feature.tree.rtg;
 
+import net.minecraft.util.math.BlockPos;
 import rtg.api.world.gen.feature.tree.rtg.TreeRTG.FractionalBlockPos;
 
 class BranchVector {
@@ -33,6 +34,13 @@ class BranchVector {
     	moved.y += dy*proportion;
     	moved.z += dz*proportion;
     	
+    }
+    
+    BlockPos reposition(BlockPos pos, float distance) {
+    	int newX = pos.getX() + (int)Math.round(dx*distance);
+    	int newY = pos.getY() + (int)Math.round(dy*distance);
+    	int newZ = pos.getZ() + (int)Math.round(dz*distance);
+    	return new BlockPos(newX,newY,newZ);
     }
 	
 }
