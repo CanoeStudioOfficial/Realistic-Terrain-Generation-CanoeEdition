@@ -5,6 +5,7 @@ import rtg.api.world.RTGWorld;
 import rtg.api.world.terrain.TerrainBase;
 import rtg.api.world.terrain.heighteffect.BumpyHillsEffect;
 import rtg.api.world.terrain.heighteffect.JitterEffect;
+import rtg.world.biome.realistic.biomesoplenty.RealisticBiomeBOPOvergrownCliffs;
 
 
 public class RealisticBiomeENVExtremeJungle extends RealisticBiomeENVBase {
@@ -20,34 +21,7 @@ public class RealisticBiomeENVExtremeJungle extends RealisticBiomeENVBase {
 
     @Override
     public TerrainBase initTerrain() {
-
-        return new TerrainBOPHighland();
+        return new RealisticBiomeBOPOvergrownCliffs.TerrainBOPOvergrownCliffs(300f, 90f, 0f);
     }
 
-    public static class TerrainBOPHighland extends TerrainBase {
-
-        private float baseHeight = 90f;
-        private BumpyHillsEffect onTop = new BumpyHillsEffect();
-        private JitterEffect withJitter;
-
-        public TerrainBOPHighland() {
-
-            onTop.hillHeight = 30;
-            onTop.hillWavelength = 60;
-            onTop.spikeHeight = 20;
-            onTop.spikeWavelength = 10;
-
-            withJitter = new JitterEffect();
-            withJitter.amplitude = 2;
-            withJitter.wavelength = 5;
-            withJitter.jittered = onTop;
-        }
-
-        @Override
-        public float generateNoise(RTGWorld rtgWorld, int x, int y, float border, float river) {
-
-            return riverized(baseHeight + withJitter.added(rtgWorld, x, y) + groundNoise(x, y, 6, rtgWorld), river);
-            //return terrainGrasslandMountains(x, y, simplex, cell, river, 4f, 80f, 68f);
-        }
-    }
 }

@@ -350,7 +350,10 @@ import rtg.world.biome.realistic.redwoods.RealisticBiomeREDRedwoodForest;
 import rtg.world.biome.realistic.redwoods.RealisticBiomeREDSnowyRainforest;
 import rtg.world.biome.realistic.redwoods.RealisticBiomeREDTemperateRainforest;
 import rtg.world.biome.realistic.rockhounding.RealisticBiomeRHWhiteSands;
+import rtg.world.biome.realistic.spookybiomes.RealisticBiomeSBBloodiedHills;
 import rtg.world.biome.realistic.spookybiomes.RealisticBiomeSBGhostlyForest;
+import rtg.world.biome.realistic.spookybiomes.RealisticBiomeSBSeepingForest;
+import rtg.world.biome.realistic.spookybiomes.RealisticBiomeSBSorbusForest;
 import rtg.world.biome.realistic.spookybiomes.RealisticBiomeSBWitchwoodForest;
 import rtg.world.biome.realistic.sugiforest.RealisticBiomeSFSugiForest;
 import rtg.world.biome.realistic.terscraft.RealisticBiomeTERSBiomeDemonite;
@@ -518,9 +521,9 @@ public final class BiomeInit {
         if (Mods.fyrecraft.isLoaded()) { init_fyrecraft(); }
         if (Mods.gravityfalls.isLoaded()) { init_gravityfalls(); }
         if (Mods.mistbiomes.isLoaded()) { init_mistbiomes(); }
-        //if (Mods.nt.isLoaded()) {
-        //    init_novamterram();
-        //}
+        if (Mods.nt.isLoaded()) {
+            init_novamterram();
+        }
         if (Mods.odioitamod.isLoaded()) { init_odioitamod(); }
         if (Mods.plants2.isLoaded()) { init_plants(); }
         if (Mods.pvj.isLoaded()) { init_pvj(); }
@@ -1754,6 +1757,15 @@ public final class BiomeInit {
         }
         if ((biome = getBiome(Mods.spookybiomes.getResourceLocation("ghostly_forest"))) != null) {
             RTGAPI.addRTGBiomes(new RealisticBiomeSBGhostlyForest(biome));
+        }
+        if ((biome = getBiome(Mods.spookybiomes.getResourceLocation("sorbus_forest"))) != null) {
+            RTGAPI.addRTGBiomes(new RealisticBiomeSBSorbusForest(biome));
+        }
+        if ((biome = getBiome(Mods.spookybiomes.getResourceLocation("seeping_forest"))) != null) {
+            RTGAPI.addRTGBiomes(new RealisticBiomeSBSeepingForest(biome));
+        }
+        if ((biome = getBiome(Mods.spookybiomes.getResourceLocation("bloodied_hills"))) != null) {
+            RTGAPI.addRTGBiomes(new RealisticBiomeSBBloodiedHills(biome));
         }
     }
 

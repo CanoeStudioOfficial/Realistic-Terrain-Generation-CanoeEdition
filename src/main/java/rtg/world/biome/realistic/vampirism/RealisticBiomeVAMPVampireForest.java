@@ -3,13 +3,19 @@ package rtg.world.biome.realistic.vampirism;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import rtg.api.config.BiomeConfig;
+import rtg.api.util.BlockUtil;
 import rtg.api.util.noise.SimplexNoise;
 import rtg.api.world.RTGWorld;
+import rtg.api.world.deco.DecoTree;
+import rtg.api.world.deco.collection.DecoCollectionForest;
+import rtg.api.world.gen.feature.tree.rtg.TreeRTG;
+import rtg.api.world.gen.feature.tree.rtg.TreeRTGQuercusFalcata;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
 
@@ -26,6 +32,33 @@ public class RealisticBiomeVAMPVampireForest extends RealisticBiomeVAMPBase {
 
     }
 
+    @Override
+    public void initDecos() {
+
+        this.addDeco(tallOakTrees());
+    }
+    
+    private DecoTree tallOakTrees() {
+
+        TreeRTG oakTree = new TreeRTGQuercusFalcata()
+            .setLogBlock(BlockUtil.getStateLog(EnumType.OAK))
+            .setLeavesBlock(BlockUtil.getStateLeaf(EnumType.OAK))
+            .setMinTrunkSize(4)
+            .setMaxTrunkSize(8)
+            .setMinCrownSize(8)
+            .setMaxCrownSize(14);
+        
+        oakTree.getValidGroundBlocks().add(BlockUtil.getBlockStateFromCfgString("vampirism:cursed_earth", null));
+
+        this.addTree(oakTree);
+
+        return new DecoTree(oakTree)
+            .setStrengthFactorForLoops(7f)
+            .setTreeType(DecoTree.TreeType.RTG_TREE)
+            .setTreeCondition(DecoTree.TreeCondition.ALWAYS_GENERATE)
+            .setMaxY(100);
+    }
+    
     @Override
     public TerrainBase initTerrain() {
 
@@ -45,7 +78,12 @@ public class RealisticBiomeVAMPVampireForest extends RealisticBiomeVAMPBase {
             0.5f //float smallStrength
         );
     }
-
+    
+    @Override
+    public boolean allowVanillaTrees() {
+    	return false;
+    }
+    
     public static class TerrainVAMPVampireForest extends TerrainBase {
 
         private float baseHeight = 72f;
