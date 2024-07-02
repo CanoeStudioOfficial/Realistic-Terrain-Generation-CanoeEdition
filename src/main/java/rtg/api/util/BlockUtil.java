@@ -524,7 +524,7 @@ public final class BlockUtil {
      */
     @Nullable
     public static IBlockState getSaplingFromLeaves(IBlockState leaves) {
-        if (!(leaves.getBlock() instanceof BlockLeaves)) { return null; }
+        if (leaves.equals(BlockUtil.getBlockStateFromCfgString("nt:red_oak_leaves"))) return BlockUtil.getBlockStateFromCfgString("nt:oak_sapling_red");
         BlockPlanks.EnumType type = (BlockPlanks.EnumType) leaves.getProperties().get(BlockOldLeaf.VARIANT);
         if (type == null) { type = (BlockPlanks.EnumType) leaves.getProperties().get(BlockNewLeaf.VARIANT); }
         if (type != null) {
