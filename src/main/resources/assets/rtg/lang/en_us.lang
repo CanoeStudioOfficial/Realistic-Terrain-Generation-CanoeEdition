@@ -60,8 +60,8 @@ gui.createWorld.customize.setting.ravineChance.tooltip=HIGHER values = FEWER rav
 gui.createWorld.customize.title.PAGE2=Water Feature Settings
 
 gui.createWorld.customize.category.RIVERS=River Settings
-gui.createWorld.customize.setting.riverSize=Size
-gui.createWorld.customize.setting.riverSize.tooltip=Adjusts the width of rivers
+gui.createWorld.customize.setting.riverSizeMult=Size
+gui.createWorld.customize.setting.riverSizeMult.tooltip=Adjusts the width of rivers
 gui.createWorld.customize.setting.riverFrequency=Frequency Multiplier
 gui.createWorld.customize.setting.riverFrequency.tooltip=Adjusts how often rivers will generate
 gui.createWorld.customize.setting.riverBendMult=Bend Multiplier
