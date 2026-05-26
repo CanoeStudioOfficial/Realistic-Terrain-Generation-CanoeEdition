@@ -10,6 +10,7 @@ import rtg.api.RTGAPI;
 import rtg.api.util.PlateauUtil;
 import rtg.event.EventHandlerCommon;
 import rtg.init.BiomeInit;
+import rtg.rtg.Tags;
 import rtg.server.RTGCommandTree;
 import rtg.compat.ModCompat;
 import rtg.world.WorldTypeRTG;
@@ -19,9 +20,9 @@ import java.nio.file.Paths;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 @Mod(
-        modid = RTG.MOD_ID,
-        name = "RTG Unofficial",
-        version = RTG.VERSION,
+        modid = Tags.MOD_ID,
+        name = Tags.MOD_NAME,
+        version = Tags.VERSION,
         dependencies = "required-after:forge@[14.23.5.2847,);after:biomesoplenty@[7.0.1.2441,);after:traverse@[1.6.0,2.0.0)",
         guiFactory = RTGGuiConfigFactory.LOCATION,
         acceptableRemoteVersions = "*"
@@ -29,7 +30,7 @@ import java.nio.file.Paths;
 public final class RTG {
 
     public static final String MOD_ID = RTGAPI.RTG_MOD_ID;
-    public static final String VERSION = "1.1.0";
+    public static final String VERSION = Tags.VERSION;
     private static final RTG instance = new RTG();
 
     private static boolean DISABLE_DECORATIONS;

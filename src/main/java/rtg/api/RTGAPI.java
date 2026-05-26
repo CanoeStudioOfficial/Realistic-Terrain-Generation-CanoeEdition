@@ -18,6 +18,7 @@ import rtg.api.util.Logger;
 import rtg.api.util.UtilityClass;
 import rtg.api.util.storage.SparseList;
 import rtg.api.world.biome.IRealisticBiome;
+import rtg.rtg.Tags;
 import rtg.world.WorldTypeRTG;
 
 import javax.annotation.Nonnull;
@@ -30,7 +31,7 @@ import java.util.*;
 public final class RTGAPI {
 
     public static final String   RTG_API_ID       = "rtgapi";
-    public static final String   VERSION          = "@API_VERSION@";
+    public static final String   VERSION          = Tags.VERSION;
     public static final String   RTG_MOD_ID       = "rtg";
     public static final String   RTG_WORLDTYPE_ID = "RTG";
     public static final SparseList<Map.Entry<Biome, IRealisticBiome>> RTG_BIOMES = new SparseList<>();
