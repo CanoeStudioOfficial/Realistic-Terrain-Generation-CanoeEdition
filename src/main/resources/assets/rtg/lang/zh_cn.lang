@@ -28,6 +28,8 @@ gui.createWorld.customize.setting.fixedBiome=单一生物群系
 gui.createWorld.customize.setting.fixedBiome.tooltip=选择单一生物群系的类型
 gui.createWorld.customize.setting.biomeSize=生物群系规模
 gui.createWorld.customize.setting.biomeSize.tooltip=改变生物群落的平均规模
+gui.createWorld.customize.setting.seaLevelMax=海平面高度上限
+gui.createWorld.customize.setting.seaLevelMax.tooltip=海平面生成的最大高度限制
 
 gui.createWorld.customize.category.SURFACE=地表设置
 gui.createWorld.customize.setting.useBoulders=启用巨石

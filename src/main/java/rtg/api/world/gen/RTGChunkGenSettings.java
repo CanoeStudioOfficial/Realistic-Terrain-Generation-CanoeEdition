@@ -19,6 +19,7 @@ public final class RTGChunkGenSettings {
 //  public final int     biomeSize;             // Vanilla
 // TODO: [Generator settings] seaLevel requires extensive edits to hard-coded values for it to work correctly.
     public final int seaLevel;              // Vanilla
+    public final int seaLevelMax;           // RTG - Sea level height limit
 
     public final boolean useBoulders;           // RTG
     public final float boulderMult;           // RTG
@@ -148,6 +149,7 @@ public final class RTGChunkGenSettings {
 //      this.fixedBiome             = settingsFactory.fixedBiome;
 //      this.biomeSize              = settingsFactory.biomeSize;
         this.seaLevel = settingsFactory.seaLevel;
+        this.seaLevelMax = settingsFactory.seaLevelMax;
 
         this.useBoulders = settingsFactory.useBoulders;
         this.boulderMult = settingsFactory.boulderMult;
@@ -277,6 +279,7 @@ public final class RTGChunkGenSettings {
         //      public int      fixedBiome           = -1;
 //      public int      biomeSize            = 4;
         public int seaLevel = 63;
+        public int seaLevelMax = 256;
 
         public boolean useBoulders = true;
         public float boulderMult = 1.0f;
@@ -430,6 +433,7 @@ public final class RTGChunkGenSettings {
 //          this.fixedBiome             = -1;
 //          this.biomeSize              = 4;
             this.seaLevel = 63;
+            this.seaLevelMax = 256;
 
             this.useBoulders = true;
             this.boulderMult = 1.0f;
@@ -577,6 +581,7 @@ public final class RTGChunkGenSettings {
 //              settings.fixedBiome             = JsonUtils.getInt(json,    "fixedBiome",           settings.fixedBiome);
 //              settings.biomeSize              = JsonUtils.getInt(json,    "biomeSize",            settings.biomeSize);
                 settings.seaLevel = JsonUtils.getInt(json, "seaLevel", settings.seaLevel);
+                settings.seaLevelMax = JsonUtils.getInt(json, "seaLevelMax", settings.seaLevelMax);
 
                 settings.useBoulders = JsonUtils.getBoolean(json, "useBoulders", settings.useBoulders);
                 settings.boulderMult = JsonUtils.getFloat(json, "boulderMult", settings.boulderMult);
@@ -713,6 +718,7 @@ public final class RTGChunkGenSettings {
 //          json.addProperty("fixedBiome",           factory.fixedBiome);
 //          json.addProperty("biomeSize",            factory.biomeSize);
             json.addProperty("seaLevel", factory.seaLevel);
+            json.addProperty("seaLevelMax", factory.seaLevelMax);
 
             json.addProperty("useBoulders", factory.useBoulders);
             json.addProperty("boulderMult", factory.boulderMult);
