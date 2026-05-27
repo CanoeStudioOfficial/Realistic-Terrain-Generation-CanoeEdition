@@ -28,8 +28,6 @@ gui.createWorld.customize.setting.fixedBiome=Fixed Biome
 gui.createWorld.customize.setting.fixedBiome.tooltip=Chooses the biome for a single-biome world
 gui.createWorld.customize.setting.biomeSize=Biome Size
 gui.createWorld.customize.setting.biomeSize.tooltip=Changes the average size of the biomes
-gui.createWorld.customize.setting.seaLevelMax=Sea Level Max Height
-gui.createWorld.customize.setting.seaLevelMax.tooltip=The maximum height for sea level generation
 
 gui.createWorld.customize.category.SURFACE=Surface Settings
 gui.createWorld.customize.setting.useBoulders=Enable Boulders
