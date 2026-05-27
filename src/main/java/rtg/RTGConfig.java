@@ -85,7 +85,7 @@ public class RTGConfig {
                     setting.setCurVal(getProperty(setting).getDouble());
                     break;
                 case seaLevel:
-                    setting.setCurVal(getProperty(setting).getInteger());
+                    setting.setCurVal(getProperty(setting).getInt());
                     break;
                 case treeDensityMultiplier:
                     setting.setCurVal(getProperty(setting).getDouble());
