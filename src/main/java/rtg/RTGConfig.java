@@ -87,6 +87,9 @@ public class RTGConfig {
                 case treeDensityMultiplier:
                     setting.setCurVal(getProperty(setting).getDouble());
                     break;
+                case seaLevelDefault:
+                    setting.setCurVal(getProperty(setting).getInt());
+                    break;
             }
         });
 
@@ -214,6 +217,10 @@ public class RTGConfig {
     public static float waterFeatureWidthMultiplier() {
         float result = ((Double) Setting.waterFeatureWidthMultiplier.getCurVal()).floatValue();
         return result;
+    }
+
+    public static int seaLevelDefault() {
+        return (Integer) Setting.seaLevelDefault.getCurVal();
     }
 
     public static void toggleWorldTypeNotification() {
@@ -347,7 +354,11 @@ public class RTGConfig {
     	
         waterFeatureWidthMultiplier(Type.DOUBLE, Category.surface,
                 "Multiplier to average width of rivers and lakes. ",
-                1.0, 0.1, 10.0);
+                1.0, 0.1, 10.0),
+
+        seaLevelDefault(Type.INTEGER, Category.surface,
+                "The default sea level height for RTG worlds. This value is used when creating a new world.",
+                63, 1, 255);
 
         private final Type type;
         private final boolean isArray;

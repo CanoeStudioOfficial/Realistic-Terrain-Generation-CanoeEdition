@@ -305,6 +305,9 @@ rtgconfig.common.surface.shadowStoneBlock=Shadow Stone Block
 rtgconfig.common.surface.shadowStoneBlock.tooltip=The block to use for stone terrain shadowing, typically seen on the cliffs of stone mountains.
 rtgconfig.common.surface.shadowDesertBlock=Shadow Desert Block
 rtgconfig.common.surface.shadowDesertBlock.tooltip=The block to use for desert terrain shadowing, typically seen on the cliffs of desert mountains.
+rtgconfig.common.surface.seaLevelDefault=Sea Level Default
+rtgconfig.common.surface.seaLevelDefault.tooltip=The default sea level height for RTG worlds. This value is used when creating a new world. Range: 1-255
+
 rtgconfig.common.trees=RTG Tree Settings
 rtgconfig.common.trees.tooltip=
 rtgconfig.common.trees.rtgTreesFromSaplings=RTG Trees From Saplings

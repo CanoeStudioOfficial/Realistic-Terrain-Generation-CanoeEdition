@@ -3,6 +3,7 @@ package rtg.api.world.gen;
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import net.minecraft.util.JsonUtils;
+import rtg.RTGConfig;
 import rtg.api.util.Logger;
 
 import java.io.IOException;
@@ -432,7 +433,7 @@ public final class RTGChunkGenSettings {
 
 //          this.fixedBiome             = -1;
 //          this.biomeSize              = 4;
-            this.seaLevel = 63;
+            this.seaLevel = RTGConfig.seaLevelDefault();
             this.seaLevelMax = 256;
 
             this.useBoulders = true;
