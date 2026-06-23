@@ -203,7 +203,10 @@ public final class BiomeAnalyzer {
             if (foundBiome != NO_BIOME) {
                 int nearestLandBiome = landSearch.biomeIDs.get(i);
                 if (nearestLandBiome > -1) {
-                    foundBiome = preferredBeach.get(nearestLandBiome);
+                    Integer preferredBeachBiome = preferredBeach.get(nearestLandBiome);
+                    if (preferredBeachBiome != null) {
+                        foundBiome = preferredBeachBiome;
+                    }
                 }
                 jitteredBiomes[i] = RTGAPI.getRTGBiome(foundBiome);
             }
