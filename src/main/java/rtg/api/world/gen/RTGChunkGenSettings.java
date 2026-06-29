@@ -276,7 +276,7 @@ public final class RTGChunkGenSettings {
 
         //      public int      fixedBiome           = -1;
 //      public int      biomeSize            = 4;
-        public int seaLevel = 63;
+        public int seaLevel = 90;
 
         public boolean useBoulders = true;
         public float boulderMult = 1.0f;
@@ -429,7 +429,7 @@ public final class RTGChunkGenSettings {
 
 //          this.fixedBiome             = -1;
 //          this.biomeSize              = 4;
-            this.seaLevel = 63;
+            this.seaLevel = 90;
 
             this.useBoulders = true;
             this.boulderMult = 1.0f;

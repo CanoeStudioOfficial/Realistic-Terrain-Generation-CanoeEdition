@@ -56,6 +56,7 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
 
     public final RTGWorld rtgWorld;
     private final RTGChunkGenSettings settings;
+    private static final int DEFAULT_SEA_LEVEL = 63;
     private final MapGenBase caveGenerator;
     private final MapGenBase ravineGenerator;
     private final MapGenStronghold strongholdGenerator;
@@ -201,14 +202,20 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
 
     public void generateTerrain(ChunkPrimer primer, float[] noise) {
 
+        generateTerrain(primer, noise, this.settings.seaLevel);
+    }
+
+    public void generateTerrain(ChunkPrimer primer, float[] noise, int seaLevel) {
+
+        final int terrainOffset = seaLevel - DEFAULT_SEA_LEVEL;
         int height;
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                height = (int) noise[x * 16 + z];
+                height = (int) noise[x * 16 + z] + terrainOffset;
 
                 for (int y = 0; y < 256; y++) {
                     if (y > height) {
-                        if (y < this.settings.seaLevel) {
+                        if (y < seaLevel) {
                             primer.setBlockState(x, y, z, Blocks.WATER.getDefaultState());
                         }
                         else {
@@ -229,6 +236,7 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
             return;
         }
 
+        final ChunkPrimer surfacePrimer = this.createSurfacePrimer(primer);
         int worldX = cx * 16;
         int worldZ = cz * 16;
 
@@ -239,7 +247,7 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
 
                 float river = -TerrainBase.getRiverStrength(mpos, rtgWorld);
                 int depth = -1;
-                biomes[x * 16 + z].rReplace(primer, mpos, x, z, depth, rtgWorld, noise, river, base);
+                biomes[x * 16 + z].rReplace(surfacePrimer, mpos, x, z, depth, rtgWorld, noise, river, base);
 
                 // sparse bedrock layers above y=0
                 if (this.settings.bedrockLayers > 1) {
@@ -254,6 +262,51 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
                 }
             }
         }
+        this.applySurfacePrimer(primer, surfacePrimer);
+    }
+
+    private ChunkPrimer createSurfacePrimer(ChunkPrimer primer) {
+
+        final int terrainOffset = this.getTerrainOffset();
+        if (terrainOffset <= 0) {
+            return primer;
+        }
+
+        ChunkPrimer surfacePrimer = new ChunkPrimer();
+        for (int x = 0; x < 16; x++) {
+            for (int z = 0; z < 16; z++) {
+                for (int y = 0; y < 256 - terrainOffset; y++) {
+                    surfacePrimer.setBlockState(x, y, z, primer.getBlockState(x, y + terrainOffset, z));
+                }
+            }
+        }
+        return surfacePrimer;
+    }
+
+    private void applySurfacePrimer(ChunkPrimer primer, ChunkPrimer surfacePrimer) {
+
+        final int terrainOffset = this.getTerrainOffset();
+        if (terrainOffset <= 0) {
+            return;
+        }
+
+        for (int x = 0; x < 16; x++) {
+            for (int z = 0; z < 16; z++) {
+                for (int y = 0; y < 256 - terrainOffset; y++) {
+                    primer.setBlockState(x, y + terrainOffset, z, surfacePrimer.getBlockState(x, y, z));
+                }
+            }
+        }
+    }
+
+    private int getTerrainOffset() {
+
+        return this.settings.seaLevel - DEFAULT_SEA_LEVEL;
+    }
+
+    private int offsetY(int y) {
+
+        return Math.max(0, Math.min(255, y + this.getTerrainOffset()));
     }
 
     @SuppressWarnings("ConstantConditions") //false-positive on `hasVillage`, IDEA is probably not looking deep enough.
@@ -312,7 +365,7 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
             // normal chance to generate underground
             else if (nextchance % settings.waterLakeChance == 0) {
                 if (TerrainGen.populate(this, world, rand, chunkX, chunkZ, hasVillage, PopulateChunkEvent.Populate.EventType.LAKE)) {
-                    (new WorldGenLakes(Blocks.WATER)).generate(world, rand, pos.up(rand.nextInt(50) + 4));//make sure that underground lakes are sufficiently underground
+                    (new WorldGenLakes(Blocks.WATER)).generate(world, rand, pos.up(this.offsetY(rand.nextInt(50) + 4)));//make sure that underground lakes are sufficiently underground
                 }
             }
         }
@@ -333,7 +386,7 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
             // normal chance to generate underground
             else if (nextchance % settings.lavaLakeChance == 0) {
                 if (TerrainGen.populate(this, world, rand, chunkX, chunkZ, hasVillage, PopulateChunkEvent.Populate.EventType.LAVA)) {
-                    (new WorldGenLakes(Blocks.LAVA)).generate(world, rand, pos.up(rand.nextInt(50) + 4));//make sure that underground lakes are sufficiently underground
+                    (new WorldGenLakes(Blocks.LAVA)).generate(world, rand, pos.up(this.offsetY(rand.nextInt(50) + 4)));//make sure that underground lakes are sufficiently underground
                 }
             }
         }

@@ -106,7 +106,7 @@ public final class WoodlandMansionRTG extends MapGenStructure {
             int corner4 = chunkprimer.findGroundBlockIdx(7 + i, 7 + j);
 
             int lowestY = Math.min(Math.min(corner1, corner2), Math.min(corner3, corner4));
-            if (lowestY < 63) {
+            if (lowestY < world.getSeaLevel()) {
                 this.isValid = false;
             } else {
                 BlockPos blockpos = new BlockPos(getChunkPosX() * 16 + 8, lowestY + 1, getChunkPosZ() * 16 + 8);

@@ -7,6 +7,7 @@ import net.minecraft.world.gen.MapGenCaves;
 
 public class MapGenCavesRTG extends MapGenCaves {
 
+    private static final int DEFAULT_SEA_LEVEL = 63;
     private final int caveDensity;
     private final int caveChance;
 
@@ -30,7 +31,7 @@ public class MapGenCavesRTG extends MapGenCaves {
 
         for (int j = 0; j < density; ++j) {
             double x = (double) (chunkX * 16 + this.rand.nextInt(16));
-            double y = (double) this.rand.nextInt(this.rand.nextInt(120) + 8);
+            double y = (double) Math.min(255, this.rand.nextInt(this.rand.nextInt(120) + 8) + worldIn.getSeaLevel() - DEFAULT_SEA_LEVEL);
             double z = (double) (chunkZ * 16 + this.rand.nextInt(16));
             int k = 1;
 

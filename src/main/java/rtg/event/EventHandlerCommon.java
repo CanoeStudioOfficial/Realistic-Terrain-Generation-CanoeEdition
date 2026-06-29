@@ -44,6 +44,8 @@ import rtg.world.biome.BiomeProviderRTG;
 @UtilityClass
 public final class EventHandlerCommon
 {
+    private static final int DEFAULT_SEA_LEVEL = 63;
+
     private EventHandlerCommon() {}
 
     public static void init() {
@@ -66,19 +68,20 @@ public final class EventHandlerCommon
 
     private static void generateFalls(final World world, final Random rand, final ChunkPos chunkPos, final Decorate.EventType type) {
         final BlockPos offsetpos = new BlockPos(chunkPos.x * 16 + 8, 0, chunkPos.z * 16 + 8);
+        final int terrainOffset = world.getSeaLevel() - DEFAULT_SEA_LEVEL;
         switch (type) {
             case LAKE_WATER:
                 // reduced chance due to reduced random y level
                 for (int i = 0; i < 20; i++) {
                     (new WorldGenLiquids(Blocks.FLOWING_WATER))
-                        .generate(world, rand, offsetpos.add(rand.nextInt(16), rand.nextInt(64) + 8, rand.nextInt(16)));
+                        .generate(world, rand, offsetpos.add(rand.nextInt(16), Math.min(255, rand.nextInt(64) + 8 + terrainOffset), rand.nextInt(16)));
                 }
                 break;
             case LAKE_LAVA:
                 // reduced chance due to reduced random y level
                 for (int i = 0; i < 5; i++) {
                     (new WorldGenLiquids(Blocks.FLOWING_LAVA))
-                        .generate(world, rand, offsetpos.add(rand.nextInt(16), rand.nextInt(rand.nextInt(rand.nextInt(64) + 8) + 8), rand.nextInt(16)));
+                        .generate(world, rand, offsetpos.add(rand.nextInt(16), Math.min(255, rand.nextInt(rand.nextInt(rand.nextInt(64) + 8) + 8) + terrainOffset), rand.nextInt(16)));
                 }
                 break;
             default:

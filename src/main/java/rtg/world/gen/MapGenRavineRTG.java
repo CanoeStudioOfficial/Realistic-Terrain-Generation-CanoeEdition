@@ -7,6 +7,7 @@ import net.minecraft.world.gen.MapGenRavine;
 
 public class MapGenRavineRTG extends MapGenRavine {
 
+    private static final int DEFAULT_SEA_LEVEL = 63;
     private final int ravineChance;
 
     MapGenRavineRTG(int ravineChance) {
@@ -20,7 +21,7 @@ public class MapGenRavineRTG extends MapGenRavine {
         if (this.rand.nextInt(this.ravineChance) == 0) {
 
             double x = (double) (chunkX * 16 + this.rand.nextInt(16));
-            double y = (double) (this.rand.nextInt(this.rand.nextInt(40) + 8) + 20);
+            double y = (double) Math.min(255, this.rand.nextInt(this.rand.nextInt(40) + 8) + 20 + worldIn.getSeaLevel() - DEFAULT_SEA_LEVEL);
             double z = (double) (chunkZ * 16 + this.rand.nextInt(16));
 
             for (int i = 0; i < 1; ++i) {
